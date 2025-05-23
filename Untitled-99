@@ -1,0 +1,21 @@
+// Transaction fee burn implementation
+function processPurchase(tokenId, price, buyer) {
+  // Calculate fee (e.g., 2% of transaction)
+  const fee = price * 0.02;
+  const burnAmount = fee * 0.5; // 50% of fees are burned
+  
+  // Transfer main amount to seller
+  transferTokens(price - fee, seller);
+  
+  // Transfer fee portion to treasury
+  transferTokens(fee - burnAmount, treasury);
+  
+  // Burn tokens
+  burnTokens(burnAmount);
+  
+  // Transfer NFT
+  transferNFT(tokenId, buyer);
+  
+  // Log events instead of using emit
+  logPurchaseCompleted(tokenId, price, fee, burnAmount);
+}

@@ -1,0 +1,20 @@
+[workspace]
+members = [
+    "pallet-nft",
+    "pallet-token",
+    "pallet-game-logic",
+    "runtime", "pallet-xcm-bridge",
+]
+resolver = "2"
+
+[profile.release]
+panic = "unwind"
+
+# Fix the patch section to use a specific commit or branch
+[patch.crates-io]
+schnorrkel = { git = "https://github.com/paritytech/schnorrkel", branch = "master" }
+
+[dependencies]
+xcm = { git = "https://github.com/paritytech/polkadot", default-features = false }
+xcm-executor = { git = "https://github.com/paritytech/polkadot", default-features = false }
+xcm-builder = { git = "https://github.com/paritytech/polkadot", default-features = false }
