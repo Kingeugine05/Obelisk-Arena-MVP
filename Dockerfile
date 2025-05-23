@@ -9,7 +9,10 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
-# Build the React app
+RUN ls -la /app
+RUN ls -la /app/public
+
+ENV PUBLIC_URL .
 RUN npm run build
 
 # Expose the port the app runs on
