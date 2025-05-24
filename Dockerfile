@@ -2,15 +2,15 @@ FROM node:18
 
 WORKDIR /app
 
-# Copy package files and install dependencies
+# First copy only package files to leverage Docker cache
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
 # Copy the rest of the application
 COPY . .
 
-RUN ls -la /app
-RUN ls -la /app/public
+# Create public directory if it doesn't exist
+RUN mkdir -p public
 
 ENV PUBLIC_URL .
 RUN npm run build
