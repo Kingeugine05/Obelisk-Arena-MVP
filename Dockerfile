@@ -4,7 +4,8 @@ WORKDIR /app
 
 # First copy only package files to leverage Docker cache
 COPY package*.json ./
-RUN npm install --production
+# Remove --production flag to include dev dependencies needed for build
+RUN npm install
 
 # Copy the rest of the application
 COPY . .
@@ -12,7 +13,10 @@ COPY . .
 # Create public directory if it doesn't exist
 RUN mkdir -p public
 
-ENV PUBLIC_URL .
+# Set PUBLIC_URL properly (empty for relative paths)
+ENV PUBLIC_URL=
+
+# Build the application
 RUN npm run build
 
 # Expose the port the app runs on

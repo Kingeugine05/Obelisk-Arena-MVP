@@ -1,0 +1,7 @@
+
+3. **Alternative Deployment Method**:
+   If you prefer not to use Docker right now, you can deploy directly:
+   ```bash
+npm install
+npm run build
+npm start
