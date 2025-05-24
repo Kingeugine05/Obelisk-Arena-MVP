@@ -5,6 +5,15 @@ const path = require('path');
 
 const app = express();
 
+// Add CSP headers
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' github.githubassets.com; style-src 'self' 'unsafe-inline';"
+  );
+  next();
+});
+
 // Serve static files from the React build
 app.use(express.static(path.join(__dirname, 'build')));
 
