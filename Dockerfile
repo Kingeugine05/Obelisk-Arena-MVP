@@ -10,9 +10,6 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
-# Create public directory if it doesn't exist
-RUN mkdir -p public
-
 # Set PUBLIC_URL properly (empty for relative paths)
 ENV PUBLIC_URL=
 
