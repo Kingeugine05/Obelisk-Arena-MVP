@@ -2,29 +2,31 @@ FROM node:18
 
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 
-# Install dependencies with verbose output
-RUN npm install --verbose
+# Install dependencies
+RUN npm install
 
-# Copy source code
-COPY . .
+# Copy critical directories explicitly
+COPY src/ ./src/
+COPY public/ ./public/
+COPY server.js ./
 
-# List contents to verify files are copied
+# Verify files are copied
 RUN ls -la
 RUN ls -la src/
 RUN ls -la public/
 
 # Set environment variables
-ENV NODE_ENV=production
 ENV PUBLIC_URL=
+ENV NODE_ENV=production
 
-# Build with verbose output
-RUN npm run build --verbose
+# Build the application
+RUN npm run build
 
 # Expose port
 EXPOSE 4000
 
-# Start command
+# Start the application
 CMD ["node", "server.js"]
