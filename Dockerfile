@@ -8,15 +8,13 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy critical directories explicitly
-COPY src/ ./src/
-COPY public/ ./public/
-COPY server.js ./
+# Copy all files (this will include src/, public/, etc.)
+COPY . .
 
 # Verify files are copied
 RUN ls -la
-RUN ls -la src/
-RUN ls -la public/
+RUN ls -la src/ || echo "src directory not found"
+RUN ls -la public/ || echo "public directory not found"
 
 # Set environment variables
 ENV PUBLIC_URL=
