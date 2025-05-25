@@ -18,7 +18,7 @@ ENV NODE_ENV=production
 # Build the application
 RUN npm run build
 
-# Expose port
+# Expose port - this is just documentation, Railway will still use PORT env var
 EXPOSE 4000
 
 # Start the application
