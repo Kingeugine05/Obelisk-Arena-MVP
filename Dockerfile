@@ -2,22 +2,29 @@ FROM node:18
 
 WORKDIR /app
 
-# First copy only package files to leverage Docker cache
+# Copy package files
 COPY package*.json ./
-# Remove --production flag to include dev dependencies needed for build
-RUN npm install
 
-# Copy the rest of the application
+# Install dependencies with verbose output
+RUN npm install --verbose
+
+# Copy source code
 COPY . .
 
-# Set PUBLIC_URL properly (empty for relative paths)
+# List contents to verify files are copied
+RUN ls -la
+RUN ls -la src/
+RUN ls -la public/
+
+# Set environment variables
+ENV NODE_ENV=production
 ENV PUBLIC_URL=
 
-# Build the application
-RUN npm run build
+# Build with verbose output
+RUN npm run build --verbose
 
-# Expose the port the app runs on
+# Expose port
 EXPOSE 4000
 
-# Command to run the application
+# Start command
 CMD ["node", "server.js"]
