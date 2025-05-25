@@ -11,11 +11,6 @@ RUN npm install
 # Copy all files (this will include src/, public/, etc.)
 COPY . .
 
-# Verify files are copied
-RUN ls -la
-RUN ls -la src/ || echo "src directory not found"
-RUN ls -la public/ || echo "public directory not found"
-
 # Set environment variables
 ENV PUBLIC_URL=
 ENV NODE_ENV=production
